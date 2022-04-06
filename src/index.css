@@ -1,3 +1,6 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Rampart+One&display=swap"); */
+@import url("https://fonts.googleapis.com/css?family=Poppins:400|Roboto:400|Material+Icons|display=swap");
+
 @import-normalize;
 @tailwind base;
 @tailwind components;
@@ -17,6 +20,13 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+@layer base {
+  html {
+    /* font-family: Proxima Nova, system-ui, sans-serif; */
+    font-family: Poppins, system-ui, sans-serif;
+  }
 }
 
 @layer components {
@@ -99,8 +109,7 @@
   }
 
   .content-list {
-    @apply flex flex-col items-center 
-    h-full w-full 
+    @apply flex flex-col items-center h-screen w-full 
     mt-0 ml-0 mx-auto px-0 pb-12 
     overflow-y-scroll;
   }
@@ -129,7 +138,7 @@
   }
 
   .post-owner {
-    @apply text-left font-semibold text-gray-800 dark:text-white mr-2 cursor-pointer;
+    @apply text-left font-semibold text-gray-800 dark:text-success mr-2 cursor-pointer;
   }
 
   .avatar-wrapper {
@@ -148,7 +157,7 @@
   }
 
   .timestamp {
-    @apply text-xs text-left font-semibold text-gray-500 dark:text-gray-600 ml-2;
+    @apply text-xs text-left font-semibold text-gray-500 dark:text-gray-400 ml-2;
   }
 
   .bottom-bar {
@@ -223,5 +232,9 @@
     transition duration-300 ease-in-out 
     hover:text-pink-500 dark:hover:text-gray-500
     cursor-pointer;
+  }
+
+  .justify-content-center {
+    @apply justify-center;
   }
 }

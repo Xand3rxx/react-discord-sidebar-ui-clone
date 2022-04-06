@@ -1,83 +1,55 @@
 import TopNavigation from "./TopNavigation";
 import { BsPlusCircleFill } from "react-icons/bs";
+import { BiSad } from "react-icons/bi";
+import { useState } from "react";
 
-const ContentContainer = () => {
+const ContentContainer = ({ posts, onAdd }) => {
+  const [comment, setComment] = useState("");
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (!comment) {
+      alert("Please enter a message.");
+      return;
+    }
+
+    onAdd({ comment });
+    setComment("");
+  };
+
   return (
     <div className="content-container">
       <TopNavigation />
-      <div className="content-list">
-        <Post
-          name="Sarah Nnamdi"
-          timestamp="one week ago"
-          text={`Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit
-          amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem
-          ipsum dolor sit amet consectetur adipisicing elit.`}
-        />
-        <Post
-          name="Isaac Chukwu"
-          timestamp="one week ago"
-          text={`Lorem ipsum dolor. `}
-        />
-        <Post name="Jill" timestamp="5 days ago" text={`Lorem.`} />
-        <Post
-          name="Ellie"
-          timestamp="4 days ago"
-          text={`Lorem ipsum dolor sit amet consectetur adipisicing elit. `}
-        />
-        <Post
-          name="Chris"
-          timestamp="4 days ago"
-          text={`Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit
-          amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem
-          ipsum dolor sit amet consectetur adipisicing elit.
-          
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem
-          ipsum dolor sit amet consectetur adipisicing elit.`}
-        />
-        <Post
-          name="Funmi Bankole"
-          timestamp="2 days ago"
-          text={`Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit
-          amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. `}
-        />
-        <Post
-          name="Israel Adesanya"
-          timestamp="22 hours ago"
-          text={`Lorem ipsum dolor sit amet consectetur adipisicing elit. ☺️ `}
-        />
-        <Post
-          name="Rebecca Cosmos"
-          timestamp="3 hours ago"
-          text={`Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit
-          amet consectetur adipisicing elit.`}
-        />
-        <Post
-          name="Bright Okoye"
-          timestamp="Just now"
-          text={`Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit
-          amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem
-          ipsum dolor sit amet consectetur adipisicing elit.`}
-        />
+      <div className="content-list mt-10">
+        {posts.length > 0 ? (
+          posts.map((post) => (
+            <Post
+              key={post.id}
+              name={post.name}
+              timestamp={post.timestamp}
+              text={post.comment}
+            />
+          ))
+        ) : (
+          <NoPostFound />
+        )}
       </div>
-      <BottomBar />
+
+      <div className="bottom-bar">
+        <form className="bottom-bar" onSubmit={onSubmit}>
+        <PlusIcon />
+          <input
+            type="text"
+            placeholder="Enter message..."
+            className="bottom-bar-input"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+          />
+        </form>
+      </div>
     </div>
   );
 };
-
-const BottomBar = () => (
-  <div className="bottom-bar">
-    <PlusIcon />
-    <input
-      type="text"
-      placeholder="Enter message..."
-      className="bottom-bar-input"
-    />
-  </div>
-);
 
 const Post = ({ name, timestamp, text }) => {
   const avatarURL = "https://avatars.dicebear.com/api/open-peeps";
@@ -85,16 +57,29 @@ const Post = ({ name, timestamp, text }) => {
   return (
     <div className={"post"}>
       <div className="avatar-wrapper">
-        <img src={`${avatarURL}/${seed}.svg`} alt="" className="avatar" />
+        <img onError={this.imageDefault} src={`${avatarURL}/${seed}.svg`} alt={name} className="avatar" />
       </div>
 
       <div className="post-content">
         <p className="post-owner">
           {name}
-          <small className="timestamp">{timestamp}</small>
+          <small className="timestamp">{formatDate(timestamp)}</small>
         </p>
         <p className="post-text">{text}</p>
       </div>
+    </div>
+  );
+};
+
+const NoPostFound = () => {
+  return (
+    <div className="dark:text-white mt-20">
+      <BiSad
+        size="60"
+        className="ml-32 justify-content-center mb-5 text-green-500 dark:shadow-lg dark:text-primary"
+      />
+      <p className="text-center text-2xl">No messages available</p>
+      <p className="text-center text-2xl">Enter a new message below.</p>
     </div>
   );
 };
@@ -105,5 +90,46 @@ const PlusIcon = () => (
     className="text-green-500 dark:shadow-lg mx-2 dark:text-primary"
   />
 );
+
+function formatDate(milliseconds) {
+  // TIP: to find current time in milliseconds, use:
+  // var current_time_milliseconds = new Date(milliseconds).getTime();
+
+  const DateString = new Date(milliseconds);
+  return DateString.toDateString();
+
+  // function numberEnding (number) {
+  //     return (number > 1) ? 's' : '';
+  // }
+
+  // // var temp = Math.floor(milliseconds / 1000);
+  // var temp = Math.floor(current_time_milliseconds / 1000);
+  // var years = Math.floor(temp / 31536000);
+  // if (years) {
+  //     return years + ' year' + numberEnding(years);
+  // }
+  // //TODO: Months! Maybe weeks?
+  // var days = Math.floor((temp %= 31536000) / 86400);
+  // if (days) {
+  //     return days + ' day' + numberEnding(days);
+  // }
+  // var hours = Math.floor((temp %= 86400) / 3600);
+  // if (hours) {
+  //     return hours + ' hour' + numberEnding(hours);
+  // }
+  // var minutes = Math.floor((temp %= 3600) / 60);
+  // if (minutes) {
+  //     return minutes + ' minute' + numberEnding(minutes);
+  // }
+  // var seconds = temp % 60;
+  // if (seconds) {
+  //     return seconds + ' second' + numberEnding(seconds);
+  // }
+  // return 'less than a second'; //'just now' //or other string you like;
+}
+
+function imageDefault(ev){
+  ev.target.src = "../public/blank.png";
+}
 
 export default ContentContainer;

@@ -11,20 +11,20 @@ const ChannelBar = () => {
     <div className="channel-bar shadow-lg">
       <ChannelBlock />
       <div className="channel-container">
-        <Dropdown header="Topics" selections={topics} />
-        <Dropdown header="Questions" selections={questions} />
-        <Dropdown header="Random" selections={random} />
+        <Dropdown id="1" header="Topics" selections={topics} />
+        <Dropdown id="2" header="Questions" selections={questions} />
+        <Dropdown id="3" header="General" selections={random} />
       </div>
     </div>
   );
 };
 
-const Dropdown = ({ header, selections }) => {
+const Dropdown = ({ header, selections, id }) => {
   const [expanded, setExpanded] = useState(true);
 
   return (
     <div className="dropdown">
-      <div onClick={() => setExpanded(!expanded)} className="dropdown-header">
+      <div onClick={() => setExpanded(!expanded)} key="id" className="dropdown-header">
         <ChevronIcon expanded={expanded} />
         <h5
           className={
