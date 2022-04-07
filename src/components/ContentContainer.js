@@ -2,6 +2,7 @@ import TopNavigation from "./TopNavigation";
 import { BsPlusCircleFill } from "react-icons/bs";
 import { BiSad } from "react-icons/bi";
 import { useState } from "react";
+import DefaultImage from "../img/blank.png";
 
 const ContentContainer = ({ posts, onAdd }) => {
   const [comment, setComment] = useState("");
@@ -37,7 +38,7 @@ const ContentContainer = ({ posts, onAdd }) => {
 
       <div className="bottom-bar">
         <form className="bottom-bar" onSubmit={onSubmit}>
-        <PlusIcon />
+          <PlusIcon />
           <input
             type="text"
             placeholder="Enter message..."
@@ -52,12 +53,24 @@ const ContentContainer = ({ posts, onAdd }) => {
 };
 
 const Post = ({ name, timestamp, text }) => {
-  const avatarURL = "https://avatars.dicebear.com/api/open-peeps";
-  const seed = Math.round(Math.random() * 100);
+  // Generate random images for avatar placeholder
+  const random = Math.floor(Math.random() * 60) + 1;
+  const avatarURL = `https://i.pravatar.cc/150?img=${random}`;
+
+  // Check for image errror
+  const onImageError = (e) => {
+    return e.target.src = DefaultImage;
+  }
+
   return (
     <div className={"post"}>
       <div className="avatar-wrapper">
-        <img onError={this.imageDefault} src={`${avatarURL}/${seed}.svg`} alt={name} className="avatar" />
+        <img
+          onError={onImageError}
+          src={`${avatarURL}`}
+          alt={name}
+          className="avatar"
+        />
       </div>
 
       <div className="post-content">
@@ -126,10 +139,6 @@ function formatDate(milliseconds) {
   //     return seconds + ' second' + numberEnding(seconds);
   // }
   // return 'less than a second'; //'just now' //or other string you like;
-}
-
-function imageDefault(ev){
-  ev.target.src = "../public/blank.png";
 }
 
 export default ContentContainer;
