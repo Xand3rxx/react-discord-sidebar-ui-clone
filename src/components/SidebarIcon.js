@@ -1,14 +1,20 @@
-const SidebarIcon = ({ icon, tooltip}) => {
+const SidebarIcon = ({ icon, tooltip }) => {
   return (
-    <div className="sidebar-icon group ">
+    <div
+      className={
+        tooltip === "Home" ? "sidebar-icon-purple group" : "sidebar-icon group"
+      }
+    >
       {icon}
-      <span className="sidebar-tooltip group-hover:scale-100">{tooltip} 💡</span>
+      <span className="sidebar-tooltip group-hover:scale-100">
+        {tooltip} 💡
+      </span>
     </div>
   );
 };
 
 SidebarIcon.defaultProps = {
-    tooltip: "tooltip",
-  };
+  tooltip: "tooltip",
+};
 
 export default SidebarIcon;

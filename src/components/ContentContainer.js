@@ -18,9 +18,17 @@ const ContentContainer = ({ posts, onAdd }) => {
     setComment("");
   };
 
+  let darkTheme = Boolean(window.localStorage.getItem("dark-theme"));
+
   return (
-    <div className="content-container">
+    <div
+      className={`content-container ${
+        darkTheme === true ? "bg-full-background" : ""
+      }`}
+    >
       <TopNavigation />
+      <WelcomeMessage />
+
       <div className="content-list mt-10">
         {posts.length > 0 ? (
           posts.map((post) => (
@@ -59,8 +67,8 @@ const Post = ({ name, timestamp, text }) => {
 
   // Check for image errror
   const onImageError = (e) => {
-    return e.target.src = DefaultImage;
-  }
+    return (e.target.src = DefaultImage);
+  };
 
   return (
     <div className={"post"}>
@@ -86,10 +94,10 @@ const Post = ({ name, timestamp, text }) => {
 
 const NoPostFound = () => {
   return (
-    <div className="dark:text-white mt-20">
+    <div className="text-primary dark:text-white mt-20 bg-hero-pattern">
       <BiSad
         size="60"
-        className="ml-32 justify-content-center mb-5 text-green-500 dark:shadow-lg dark:text-primary"
+        className="ml-32 justify-content-center mb-5 text-green-500 dark:shadow-lg"
       />
       <p className="text-center text-2xl">No messages available</p>
       <p className="text-center text-2xl">Enter a new message below.</p>
@@ -102,6 +110,18 @@ const PlusIcon = () => (
     size="22"
     className="text-green-500 dark:shadow-lg mx-2 dark:text-primary"
   />
+);
+
+const WelcomeMessage = () => (
+  <div>
+    <h1 className="text-primary dark:text-white font-extrabold mx-10 mt-5 text-2xl">
+      Welcome to # 💡 -discord-chat-server!
+    </h1>
+    <h3 className="text-gray-700 dark:text-gray-500 font-extrabold mx-10 text-1xl">
+      This is the start of the # 💡 -discord-chat-server channel
+    </h3>
+    <hr className="text-gray-900 dark:text-gray-500 my-3" />
+  </div>
 );
 
 function formatDate(milliseconds) {

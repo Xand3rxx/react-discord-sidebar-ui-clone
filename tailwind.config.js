@@ -10,7 +10,9 @@ module.exports = {
       colors: {
         primary: "#202225",
         secondary: "#5865f2",
-        success: "#50cd89",
+        // success: "#50cd89",
+        success: "#3BA55D",
+        discordPurple: "#5865F2",
         gray: {
           900: "#202225",
           800: "#2f3136",
@@ -29,6 +31,10 @@ module.exports = {
         // Rampart: ["Rampart One", "cursive"],
         Poppins: ["Poppins"],
       },
+       backgroundImage: {
+        'hero-pattern': "url('/src/img/dashboard.svg')",
+        'full-background': "url('/src/img/background.svg')",
+      }
     },
   },
   variants: {

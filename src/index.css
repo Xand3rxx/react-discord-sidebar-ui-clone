@@ -40,6 +40,16 @@
     cursor-pointer shadow-lg;
   }
 
+  .sidebar-icon-purple {
+    @apply relative flex items-center justify-center 
+    h-12 w-12 mt-2 mb-2 mx-auto  
+  bg-indigo-500 hover:bg-indigo-500 dark:bg-indigo-600 dark:bg-opacity-80
+  text-white hover:text-white
+    hover:rounded-xl rounded-3xl
+    transition-all duration-300 ease-linear
+    cursor-pointer shadow-lg;
+  }
+
   .sidebar-tooltip {
     @apply absolute w-auto p-2 m-2 min-w-max left-14 rounded-md shadow-md
     text-white bg-gray-900 
@@ -65,7 +75,7 @@
     @apply text-gray-500
     mr-3 ml-4
     transition duration-300 ease-in-out 
-    hover:text-pink-400 
+    hover:text-success 
     cursor-pointer;
   }
 
@@ -74,12 +84,12 @@
   }
 
   .title-hashtag {
-    @apply text-lg tracking-wider font-semibold text-gray-500 
+    @apply text-lg tracking-wider font-semibold text-gray-500 dark:text-gray-400
     ml-2 my-auto;
   }
 
   .title-text {
-    @apply text-xl text-gray-500 tracking-wider font-semibold text-opacity-80 
+    @apply text-xl text-gray-500 dark:text-gray-400 tracking-wider font-semibold text-opacity-80 
     mr-auto ml-2 my-auto 
     transition duration-300 ease-in-out;
   }
@@ -98,6 +108,15 @@
     bg-transparent outline-none 
     text-gray-500  placeholder-gray-500
     pl-1 rounded;
+  }
+
+  .friend-search {
+    @apply flex items-center justify-start 
+    bg-gray-400 dark:bg-gray-900
+    text-gray-500
+    px-2 h-7 ml-2 mr-2 mb-2
+    rounded-sm shadow-md
+    transition duration-300 ease-in-out;
   }
 
   .content-container {
@@ -193,7 +212,7 @@
   }
 
   .channel-block-text {
-    @apply text-lg tracking-wider font-bold 
+    @apply text-lg tracking-wider font-extrabold 
     text-gray-600 dark:text-gray-400 
     mr-auto ml-4 my-auto align-middle;
   }
@@ -210,13 +229,13 @@
   }
 
   .dropdown-header-text {
-    @apply text-gray-500  text-opacity-90 
-    text-lg font-semibold
+    @apply text-gray-500 dark:text-gray-400 text-opacity-90 
+    text-lg font-bold
     cursor-default;
   }
 
   .dropdown-header-text-selected {
-    @apply text-blue-500 text-opacity-90 text-lg font-bold;
+    @apply text-gray-500 dark:text-gray-400 dark:text-opacity-80 text-lg font-extrabold;
   }
 
   .dropdown-selection {
@@ -227,14 +246,18 @@
   }
 
   .dropdown-selection-text {
-    @apply text-gray-500 font-semibold tracking-wide
+    @apply text-gray-500 dark:text-gray-300 font-semibold tracking-wide
     mr-auto 
     transition duration-300 ease-in-out 
-    hover:text-pink-500 dark:hover:text-gray-500
-    cursor-pointer;
+    hover:text-success dark:hover:text-gray-500
+    cursor-pointer z-50;
   }
-
+  /* text-gray-500 */
   .justify-content-center {
     @apply justify-center;
+  }
+
+  .selected-bar {
+    @apply bg-gray-400 dark:bg-gray-500 my-1 rounded-sm;
   }
 }
